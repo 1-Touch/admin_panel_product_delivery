@@ -1,0 +1,6 @@
+{
+    "name": "Vendorlist",
+    "version": "0.0.0",
+    "main": "Vendorlist.js",
+    "private": true
+}
