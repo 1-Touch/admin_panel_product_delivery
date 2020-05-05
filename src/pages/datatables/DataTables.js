@@ -70,7 +70,9 @@ const DatatablePage = (props) => {
         const columns = [
             { label: <span>Product Name &#x021F5;</span>, field: 'product_name', sort: 'asc', width: 270 },
             { label: <span>Category Name &#x021F5;</span>, field: 'category_name', sort: 'asc', width: 270 },
-            { label: <span>Vendor Name &#x021F5;</span>, field: 'vendor_name', sort: 'asc', width: 270 },            
+            { label: <span>Vendor Name &#x021F5;</span>, field: 'vendor_name', sort: 'asc', width: 270 },
+            { label: <span>Product Quantity &#x021F5;</span>, field: 'available_product_quantity', sort: 'asc', width: 270 },
+            { label: <span>Product Price &#x021F5;</span>, field: 'product_price', sort: 'asc', width: 270 },            
             { label: 'Action', field: 'action', sort: 'disabled', width: 100 },
         ];
 
@@ -89,7 +91,6 @@ const DatatablePage = (props) => {
             { label: <span>Applied Price  &#x021F5;</span>, field: 'applied_price', sort: 'asc', width: 270 },
             { label: <span>Total Price  &#x021F5;</span>, field: 'total_price', sort: 'asc', width: 270 },
             { label: <span>Payment Mode  &#x021F5;</span>, field: 'payment_mode', sort: 'asc', width: 270 },            
-            { label: 'Action', field: 'action', sort: 'disabled', width: 100 },
         ];
 
         const rows = props.data;
@@ -111,6 +112,4 @@ const DatatablePage = (props) => {
             />
     );
 }
-
-
 export default DatatablePage;
