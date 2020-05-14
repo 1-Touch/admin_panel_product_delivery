@@ -1,24 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MDBBtn } from 'mdbreact';
-import { useSelector } from 'react-redux';
 
 // Components
 import Datatables from '../datatables/DataTables';
 import FormModal from '../../components/Modals/FormModal/FormModal';
 
+import { useSelector, connect, useDispatch } from 'react-redux';
+import { vendorList } from '../../actions/VendorAction';
+
 const Vendorlist = (props) => {
   const [open, setOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState(null);
 
+  let user_id = 1 ;
+  window.title = "Product Vendors" ;
+
   // Selectors
-  const { vendorFormFields, vendorTableData } = useSelector(
+  const { vendorFormFields, vendorTableData, isLoading } = useSelector(
     (state) => state.vendor
   );
+
+  // Dispatch an action :- 
+  const dispatchAction = useDispatch();
+
+  useEffect( () => {
+    const dashboardDetails = dispatchAction(vendorList(user_id));  
+    console.log(dashboardDetails);
+  },[vendorTableData]);
+
 
   // Edit Discount Tag :-
   const handleEdit = (e, rowData, id) => {
     setModalTitle('Edit Details');
     handleOpen();
+  };
+
+  // Edit Discount Tag :-
+  const handleActive = (e, rowData, id) => {
+
+  };
+
+  // Edit Discount Tag :-
+  const handleDeActive = (e, rowData, id) => {
+    
   };
 
   // Delete Discount Tag :-
@@ -38,30 +62,102 @@ const Vendorlist = (props) => {
     setOpen(false);
   };
 
+  // For the activated vendor :-
   const vendorData = vendorTableData.map((value, index) => {
-    value.action = (
-      <div className='btnStyling'>
-        <MDBBtn
-          onClick={(e) => handleEdit(e, value, value._id)}
-          size='sm'
-          color='primary'
-          title='Edit'
-        >
-          Edit
-        </MDBBtn>
-        <MDBBtn
-          onClick={(e) => handleDelete(e, value._id)}
-          size='sm'
-          color='primary'
-          title='Delete'
-        >
-          Delete
-        </MDBBtn>
-      </div>
-    );
+    
+    if(value.is_active == 1 && value.is_requested == 1){
 
-    return value;
+        value.action = (
+        <div className='btnStyling'>
+          <MDBBtn
+            onClick={(e) => handleEdit(e, value, value._id)}
+            size='sm'
+            color='primary'
+            title='Edit'
+          >
+            Edit
+          </MDBBtn>
+           <MDBBtn
+            onClick={(e) => handleDelete(e, value._id)}
+            size='sm'
+            color='primary'
+            title='Delete'
+          >
+            Decline
+          </MDBBtn>
+          <MDBBtn
+            onClick={(e) => handleDelete(e, value._id)}
+            size='sm'
+            color='primary'
+            title='Delete'
+          >
+            Delete
+          </MDBBtn>
+        </div>
+      );
+    }
+
+    if( value.is_active == 0 && value.is_requested == 1){
+      
+        value.action = (
+        <div className='btnStyling'>
+          <MDBBtn
+            onClick={(e) => handleActive(e, value, value._id)}
+            size='sm'
+            color='primary'
+            title='Edit'
+          >
+            Activate
+          </MDBBtn>
+          <MDBBtn
+            onClick={(e) => handleDelete(e, value._id)}
+            size='sm'
+            color='primary'
+            title='Delete'
+          >
+            Delete
+          </MDBBtn>
+        </div>
+      );
+    }
+
+
+    if(value.is_requested == 0 && value.is_active == 0){
+      
+        value.action = (
+        <div className='btnStyling'>
+          <MDBBtn
+            onClick={(e) => handleActive(e, value, value._id)}
+            size='sm'
+            color='primary'
+            title='Edit'
+          >
+            Activate
+          </MDBBtn>
+          <MDBBtn
+            onClick={(e) => handleDeActive(e, value._id)}
+            size='sm'
+            color='primary'
+            title='Delete'
+          >
+            Decline
+          </MDBBtn>
+          <MDBBtn
+            onClick={(e) => handleDelete(e, value._id)}
+            size='sm'
+            color='primary'
+            title='Delete'
+          >
+            Delete
+          </MDBBtn>
+        </div>
+      );
+    }
+
+    return value ;
+    
   });
+
 
   return (
     <>
