@@ -1,4 +1,6 @@
 const initialState = {
+  
+  isLoading : true,
 
 	userDetails : [
     
@@ -87,13 +89,43 @@ const initialState = {
           totalUserTitle : "Total Transaction",
           totalUser : "1150$"
       }
-  ]
+  ],
 }
 
 
 const dashboardReducer = (state = initialState, action) => {
 
 	switch(action.type){
+    case "user_stats_success" : 
+      /* Dashboard Reducers Logic */
+      return {
+          ...state,
+          isLoading : false,
+          state : state
+      } ;
+
+    break ;
+
+    case "user_stats_loading" :
+      
+      return {
+          ...state,
+          isLoading : true,
+          state : state
+      } ;
+
+    break;
+
+    case "user_stats_failure" :
+      
+      return {
+          ...state,
+          isLoading : false,
+          state : state
+      } ;
+
+    break;
+
 		default:
 			return state ;
 	}

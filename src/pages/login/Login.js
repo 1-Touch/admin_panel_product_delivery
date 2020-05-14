@@ -249,7 +249,6 @@ function Login(props) {
                       <MenuItem value={120}>Sporting Goods and Equipment</MenuItem>
 
                       
-                      
                     </Select>
                     <FormHelperText>Category</FormHelperText>
               </FormControl>
