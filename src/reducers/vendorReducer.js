@@ -197,6 +197,9 @@ const countries = [
 ];
 
 const initialState = {
+
+  isLoading : true,
+
   vendorFormFields: [
     {
       type: 'text',
@@ -254,16 +257,38 @@ const initialState = {
     },
   ],
   vendorTableData: [
-    { id: 1, name: 'James', mobile: 236479515, address: 'Florida' },
-    { id: 1, name: 'Prasenjit', mobile: 789452256, address: 'Chandigarh' },
-    { id: 1, name: 'Ashish', mobile: 6546512111, address: 'Chandigarh' },
-    { id: 1, name: 'Deepak', mobile: 5454151255, address: 'Gurgaon' },
-    { id: 1, name: 'Rajat', mobile: 7379514571, address: 'Kanpur' },
+    { id: 1, name: 'James', mobile: 236479515, address: 'Florida', is_active : 1 , is_requested : 1 },
+    { id: 2, name: 'Prasenjit', mobile: 789452256, address: 'Chandigarh',  is_active : 1 , is_requested : 1 },
+    { id: 3, name: 'Ashish', mobile: 6546512111, address: 'Chandigarh', is_active : 0 , is_requested : 1 },
+    { id: 4, name: 'Deepak', mobile: 5454151255, address: 'Gurgaon', is_active : 0 , is_requested : 1 },
+    { id: 5, name: 'Rajat', mobile: 7379514571, address: 'Kanpur', is_active : 0 , is_requested : 0 },
+    { id: 6, name: 'Rajat', mobile: 7379514571, address: 'Kanpur', is_active : 0 , is_requested : 0 },
   ],
 };
 
 const vendorReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case "vendor_list_success" : 
+      /* Dashboard Reducers Logic */
+      return {
+          ...state,
+          isLoading : false,
+          state : state
+      } ;
+
+    break ;
+
+    case "vendor_list_failure" :
+      
+      return {
+          ...state,
+          isLoading : false,
+          state : state
+      } ;
+
+    break;
+
     default:
       return state;
   }
