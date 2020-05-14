@@ -112,4 +112,6 @@ const DatatablePage = (props) => {
             />
     );
 }
+
+
 export default DatatablePage;
